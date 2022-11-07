@@ -116,37 +116,6 @@ vae.compile(optimizer=tensorflow.keras.optimizers.Adam(lr=0.0005), loss=loss_fun
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # # load the dataset
 data_X = loadmat('data_X_freq_los')
 data_X_los = numpy.abs(data_X.get('data_X_freq_los'))
@@ -211,11 +180,7 @@ vae.save("VAE.h5")
 encoder = tensorflow.keras.models.load_model("VAE_encoder.h5", compile=False)
 decoder = tensorflow.keras.models.load_model("VAE_decoder.h5", compile=False)
 
-# # Preparing MNIST Dataset
-# (x_train, y_train), (x_test, y_test) = tensorflow.keras.datasets.mnist.load_data()
-# x_test = x_test.astype("float32") / 255.0
-#
-# x_test = numpy.reshape(x_test, newshape=(x_test.shape[0], x_train.shape[1], x_train.shape[2], 1))
+
 
 encoded_data = encoder.predict(x_test)
 decoded_data = decoder.predict(encoded_data)
@@ -228,7 +193,4 @@ plt.figure(figsize=(6, 6))
 plt.scatter(encoded_data[:, 0],encoded_data[:, 1], c=y_test)
 plt.colorbar()
 plt.show()
-# plt.figure(figsize=(6, 6))
-# plt.scatter(encoded_data[:, 1], c=y_test)
-# plt.colorbar()
-# plt.show()
+
